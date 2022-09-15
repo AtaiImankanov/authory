@@ -10,6 +10,7 @@ namespace Authory.Models
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

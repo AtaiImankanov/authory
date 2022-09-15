@@ -156,5 +156,9 @@ namespace Authory.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        private bool PhoneExists(int id)
+        {
+            return _context.Phones.Any(e => e.Id == id);
+        }
     }
 }
