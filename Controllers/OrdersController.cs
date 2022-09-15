@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Authory.Models;
-using Lab.Models;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace Authory.Controllers
@@ -24,7 +24,7 @@ namespace Authory.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var userContext = _context.Order.Include(o => o.Phone);
+            var userContext = _context.Orders.Include(o => o.Phone);
             return View(await userContext.ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace Authory.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .Include(o => o.Phone)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
@@ -80,7 +80,7 @@ namespace Authory.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
@@ -134,7 +134,7 @@ namespace Authory.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .Include(o => o.Phone)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
@@ -150,15 +150,15 @@ namespace Authory.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
-            _context.Order.Remove(order);
+            var order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

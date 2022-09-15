@@ -1,4 +1,4 @@
-﻿using Lab.Models;
+﻿
 using Microsoft.EntityFrameworkCore;
 
 namespace Authory.Models
@@ -22,6 +22,6 @@ namespace Authory.Models
 
         }
 
-        public DbSet<Lab.Models.Order> Order { get; set; }
+
     }
 }

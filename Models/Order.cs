@@ -1,4 +1,4 @@
-﻿namespace Lab.Models
+﻿namespace Authory.Models
 {
     public class Order
     {

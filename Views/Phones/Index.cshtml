@@ -1,10 +1,9 @@
-﻿@model IEnumerable<Lab.Models.Phone>
+﻿@model IEnumerable<Authory.Models.Phone>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,10 +21,10 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayNameFor(model => model.CategoriesId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.BrandId)
             </th>
             <th></th>
         </tr>
@@ -43,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
+                @Html.DisplayFor(modelItem => item.Categories.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Brand.Id)
@@ -51,7 +50,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>|
                 <a asp-action="Create" asp-controller="Orders" asp-route-PhoneId="@item.Id">Order</a>
             </td>
         </tr>

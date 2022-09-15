@@ -55,7 +55,7 @@ namespace Authory.Controllers
                     Role role = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "User");
                     User authUser=new User { Email=model.Email,Password=model.Password,RoleId=2,Role=role};
                     _db.Add(authUser);
-                    _db.SaveChangesAsync();
+                    await _db.SaveChangesAsync();
                     await Authenticate(authUser);
                     return RedirectToAction("Index", "Home");
                 }
@@ -83,6 +83,19 @@ namespace Authory.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
+        }
+
+        public bool ValidEmail(string email)
+        {
+
+            foreach (var brand in _db.Users)
+            {
+                if (brand.Email == email)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

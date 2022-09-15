@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Authory.Models;
-using Lab.Models;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace Authory.Controllers
@@ -23,8 +23,8 @@ namespace Authory.Controllers
         // GET: Phones
         public async Task<IActionResult> Index()
         {
-            var userContext = _context.Phones.Include(p => p.Brand);
-            return View(await userContext.ToListAsync());
+            var mobileContext = _context.Phones.Include(p => p.Brand).Include(p => p.Categories);
+            return View(await mobileContext.ToListAsync());
         }
 
         // GET: Phones/Details/5

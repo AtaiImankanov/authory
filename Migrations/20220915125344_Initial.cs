@@ -55,8 +55,7 @@ namespace Authory.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    CategoriesId = table.Column<int>(nullable: true),
+                    CategoriesId = table.Column<int>(nullable: false),
                     BrandId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -73,7 +72,7 @@ namespace Authory.Migrations
                         column: x => x.CategoriesId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,8 +81,9 @@ namespace Authory.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     RoleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -98,7 +98,7 @@ namespace Authory.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -109,9 +109,9 @@ namespace Authory.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Phones_PhoneId",
+                        name: "FK_Orders_Phones_PhoneId",
                         column: x => x.PhoneId,
                         principalTable: "Phones",
                         principalColumn: "Id",
@@ -129,12 +129,12 @@ namespace Authory.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "Password", "RoleId" },
-                values: new object[] { 1, "admin@admin.ad", "admin123", 1 });
+                columns: new[] { "Id", "Email", "Name", "Password", "RoleId" },
+                values: new object[] { 1, "admin@admin.ad", null, "admin123", 1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_PhoneId",
-                table: "Order",
+                name: "IX_Orders_PhoneId",
+                table: "Orders",
                 column: "PhoneId");
 
             migrationBuilder.CreateIndex(
@@ -156,7 +156,7 @@ namespace Authory.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Users");

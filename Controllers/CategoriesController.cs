@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Authory.Models;
-using Lab.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Authory.Controllers
